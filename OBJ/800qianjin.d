@@ -1,0 +1,9 @@
+..\obj\800qianjin.o: ..\RESOURCE\800qianjin.c
+..\obj\800qianjin.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\800qianjin.o: ..\EMWIN\STemWin\inc\GUI.h
+..\obj\800qianjin.o: ..\EMWIN\STemWin\inc\GUI_ConfDefaults.h
+..\obj\800qianjin.o: ..\EMWIN\STemWin\Config\GUIConf.h
+..\obj\800qianjin.o: ..\EMWIN\STemWin\inc\GUI_Type.h
+..\obj\800qianjin.o: ..\EMWIN\STemWin\inc\LCD.h
+..\obj\800qianjin.o: ..\EMWIN\STemWin\inc\Global.h
+..\obj\800qianjin.o: ..\EMWIN\STemWin\inc\GUI_Version.h

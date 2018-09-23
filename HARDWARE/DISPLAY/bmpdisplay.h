@@ -1,0 +1,27 @@
+#ifndef _BMPDISPLAY_H
+#define _BMPDISPLAY_H
+#include "bsp.h"
+
+#define BMPMEMORYSIZE	(8*1024*1024)
+typedef enum
+{
+	CAR,
+	DIANCHI,
+	FAN,
+	HOUTUI,
+	JIAOSHA,
+	JINGUANG,
+	KONGBAI,
+	QIANJIN,
+	SAOSHUA,
+	SHANDIAN,
+	SHOUSHA,
+	SHUIWEIDI,
+	WENDUJI,
+	YOUZHUAN,
+	ZUOZHUAN
+}PICNAME;
+
+int bmptest(PICNAME name, u8 *BMPFileName, u32 x,u32 y);
+//typedef enum PICTURE PICNAME;
+#endif
