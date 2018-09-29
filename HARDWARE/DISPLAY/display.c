@@ -5,8 +5,8 @@
 #include "time.h"
 #include "stdio.h"
 #include "EmWinHZFont.h"
-#include "bmpdisplay.h"
 #include "WM.h"
+#include "bmpdisplay.h"
 
 GUI_BITMAP *bitmap;
 CI_PARAMETER ci_parameter;
@@ -448,64 +448,6 @@ void ShowRightLight(void)
 	}
 }
 
-//显示近光灯
-void ShowDippedLight(void)
-{
-	U16 value;
-	value=ci_parameter.DippedLight;
-	if((display_init_OK==0) || (display_init_OK==1 && value!=ci_parameter_old.DippedLight))
-	{
-		if (value==0)//上拉，0有效
-		{
-			//GUI_DrawBitmap(&bm700jinguang, 	259, 15);
-			bmptest(JINGUANG, (u8 *)"1:/PICTURE/Diandong/700jinguang.bmp", 259, 15);
-		}
-		else
-		{
-			//GUI_DrawBitmap(&bm700kongbai, 	259, 15);
-			//GUI_DrawBitmap(&bm700jinguang, 	259, 15);
-			bmptest(KONGBAI, (u8 *)"1:/PICTURE/Diandong/700kongbai.bmp", 259, 15);
-			//bmptest(JINGUANG, (u8 *)"1:/PICTURE/Diandong/700jinguang.bmp", 259, 15);
-		}
-		ci_parameter_old.DippedLight=value;
-	}
-}
-
-//显示后退灯的图标
-void ShowBackwardLight(void)
-{
-	U16 value;
-	value=ci_parameter.BackWardLight;
-	if((display_init_OK==0) || (value!=ci_parameter_old.BackWardLight))
-	{	
-		if (value==1)
-		{
-			//GUI_DrawBitmap(&bm700houtui, 	425, 15);
-			bmptest(HOUTUI, (u8 *)"1:/PICTURE/Diandong/700houtui.bmp", 425, 15);
-			if(P_DO2 == 0)              //原先是MP5画面
-			{
-				DisOUT2(1);               //P_DO2置高
-				flag_do2 = 1;             //DO2标志置1
-			}
-			P_VideoSwitch(1);           //切为倒车影像画面
-		}
-		else
-		{
-			//GUI_DrawBitmap(&bm700kongbai, 425, 15);
-			//GUI_DrawBitmap(&bm700houtui, 	425, 15);
-			bmptest(KONGBAI, (u8 *)"1:/PICTURE/Diandong/700kongbai.bmp", 425, 15);
-			//bmptest(HOUTUI, (u8 *)"1:/PICTURE/Diandong/700houtui.bmp", 425, 15);
-			if(flag_do2)
-			{
-				DisOUT2(0);
-				flag_do2 = 0;
-				delay_ms(1000);
-			}			
-			P_VideoSwitch(0);           //切为仪表画面
-		}
-		ci_parameter_old.BackWardLight=value;
-	}
-}
 
 //指示灯统一显示函数，只在主界面显示
 /*
@@ -516,9 +458,9 @@ void ShowBackwardLight(void)
 @parameter x: 横坐标
 @parameter y: 纵坐标
 */
-void Show_Light(u8 lightstatus, u8 lightstatus_old, PICNAME picname, u8 level, u16 x, u16 y)
+void Show_Light(u16 lightstatus, u16 lightstatus_old, PICNAME picname, u16 level, u16 x, u16 y)
 {
-		if((display_init_OK == 0 ) || (lightstatus!=lightstatus_old))
+		if((displayflag == 0) && ((display_init_OK == 0 ) || (lightstatus!=lightstatus_old)))
 		{	
 			if (lightstatus == level)
 			{
@@ -535,7 +477,7 @@ void Show_Light(u8 lightstatus, u8 lightstatus_old, PICNAME picname, u8 level, u
 			}
 			else
 			{
-				bmptest(KONGBAI, (u8 *)BMPFilePath[picname], x, y);
+				bmptest(KONGBAI, (u8 *)BMPFilePath[KONGBAI], x, y);
 				if(picname == 3)
 				{
 					if(flag_do2)
@@ -597,98 +539,7 @@ void Show_Light2(u8 lightstatus, u8 lightstatus_old, GUI_CONST_STORAGE GUI_BITMA
 }
 */
 
-//显示前进灯的图标
-void ShowForwardLight(void)
-{
-	U16 value;
-	value=ci_parameter.ForwardLight;
-	if((display_init_OK==0) || (value!=ci_parameter_old.ForwardLight))
-		{	
-		if (value==1)
-		{
-			//GUI_DrawBitmap(&bm700qianjin, 	342, 15);	
-			bmptest(QIANJIN, (u8 *)"1:/PICTURE/Diandong/700qianjin.bmp", 342, 15);
-		}
-		else
-		{
-			//GUI_DrawBitmap(&bm700kongbai, 	342, 15);
-			//GUI_DrawBitmap(&bm700qianjin, 	342, 15);	
-			bmptest(KONGBAI, (u8 *)"1:/PICTURE/Diandong/700kongbai.bmp", 342, 15);
-			//bmptest(QIANJIN, (u8 *)"1:/PICTURE/Diandong/700qianjin.bmp", 342, 15);
-		}
-		ci_parameter_old.ForwardLight=value;
-		}
-}
 
-//显示脚刹灯的图标
-void ShowFootBrakeLight(void)
-{
-	U16 value;
-	value=ci_parameter.FootBrakeLight;
-	if((display_init_OK==0) || (display_init_OK==1 && value!=ci_parameter_old.FootBrakeLight))
-	{	
-		if (value==1)
-		{
-			//GUI_DrawBitmap(&bm700jiaosha, 	176, 15);	
-			bmptest(JIAOSHA, (u8 *)"1:/PICTURE/Diandong/700jiaosha.bmp", 176, 15);
-		}
-		else
-		{
-			//GUI_DrawBitmap(&bm700kongbai, 176, 15);
-			//GUI_DrawBitmap(&bm700jiaosha, 	176, 15);	
-			bmptest(KONGBAI, (u8 *)"1:/PICTURE/Diandong/700kongbai.bmp", 176, 15);
-			//bmptest(JIAOSHA, (u8 *)"1:/PICTURE/Diandong/700jiaosha.bmp", 176, 15);
-		}
-		ci_parameter_old.FootBrakeLight=value;
-	}
-}
-
-//显示手刹灯
-void ShowHandBrakeLight(void)
-{
-	U16 value;
-	value=ci_parameter.HandBrakeLight;
-	if((display_init_OK==0) || (display_init_OK==1 && value!=ci_parameter_old.HandBrakeLight))
-	{
-		if (value==1)
-		{
-			//GUI_DrawBitmap(&bm700shousha, 	93, 15);
-			bmptest(SHOUSHA, (u8 *)"1:/PICTURE/Diandong/700shousha.bmp", 93, 15);
-		}
-		else 
-		{
-			//GUI_DrawBitmap(&bm700kongbai, 	93, 15);
-			//GUI_DrawBitmap(&bm700shousha, 	93, 15);
-			bmptest(KONGBAI, (u8 *)"1:/PICTURE/Diandong/700kongbai.bmp", 93, 15);
-			//bmptest(SHOUSHA, (u8 *)"1:/PICTURE/Diandong/700shousha.bmp", 93, 15);
-		}
-		ci_parameter_old.HandBrakeLight=value;
-	}
-}
-
-
-//显示低水位警告
-void ShowLowWaterWarning(void)
-{
-	U16 value;
-	value=ci_parameter.LowWaterWarning;
-	if((display_init_OK==0) || (display_init_OK==1 && value!=ci_parameter_old.LowWaterWarning))
-	{
-		if (value==0)                                     //change by mch 20180524
-		{
-			//GUI_DrawBitmap(&bm700shuiweidi, 	508, 15);
-			bmptest(SHUIWEIDI, (u8 *)"1:/PICTURE/Diandong/700shuiweidi.bmp", 508, 15);
-		}
-		else
-		{
-			//GUI_DrawBitmap(&bm700kongbai, 	508, 15);
-			//GUI_DrawBitmap(&bm700shuiweidi, 	508, 15);
-			bmptest(KONGBAI, (u8 *)"1:/PICTURE/Diandong/700kongbai.bmp", 508, 15);
-			//bmptest(SHUIWEIDI, (u8 *)"1:/PICTURE/Diandong/700shuiweidi.bmp", 508, 15);
-		}
-		ci_parameter_old.LowWaterWarning=value;
-	}
-}
 
 void ShowCar(void)
 {
@@ -1337,7 +1188,13 @@ void Show_Speed(u16 speed, u16 speed_old, u8 flag_device, u8 num, u16 x, u16 y)
 		{
 			GUI_SetFont(&GUI_FontDSDigital32);
 		}
-		
+		if(flag_device == 4)
+		{
+			GUI_SetFont(&GUI_FontDSDigital96);
+			GUI_SetColor(GUI_WHITE);
+			GUI_DispDecAt(0, 280, 240, 2);
+		}
+		GUI_SetColor(GUI_BLACK);
 		GUI_DispDecAt(temp, x, y, num);	                  //显示整数部分
 		speed_old = speed;
 	}		
@@ -2378,7 +2235,8 @@ void ShowMsgInCareInterface1(void)
 	//GUI_DispDecAt(FanCurrent%10, 268, 267, 1);
 	
 	//风机转速
-	GUI_DispDecAt(FanSpeed, 210, 167, 4);
+	//GUI_DispDecAt(FanSpeed, 210, 167, 4);
+	Show_Speed(fan_motor.Speed, fan_motor_old.Speed, 2, 4, 210, 167);              //风机转速
 	
 	//风机温度
 	ShowTemp(FanTemp, 217, 217, 3);
@@ -2676,7 +2534,6 @@ void InitMainInterface(void)
 			ci_parameter.OdoMeter = AT24CXX_ReadLenByte(4,4);  //获取里程值
 		}
 
-		//display_init_OK=0;
 		GUI_Clear();
 		GUI_SetFont(&GUI_Font24_ASCII); //设置字体
 		GUI_SetColor(GUI_BLACK);       //设置前景色(如文本，画线等颜色)
@@ -2702,7 +2559,7 @@ void InitMainInterface(void)
 		ci_parameter.UserKey1=0;
 		ci_parameter.UserKey2Debug=0;
 		//add by mch 20180823
-		BatteryQuantity=0;
+		BatteryQuantity=1000;
 //		Alarm_Code=0;
 		
 		ci_parameter_old.CellVoltage=1;
@@ -2727,31 +2584,22 @@ void InitMainInterface(void)
 
 		ShowAll();
 
-//		Show_Light(ci_parameter.LeftLight, ci_parameter_old.LeftLight, ZUOZHUAN, 0, 10, 15);                //左转
-//		Show_Light(ci_parameter.RightLight, ci_parameter_old.RightLight, YOUZHUAN, 0, 591, 15);             //右转
-//		Show_Light(ci_parameter.DippedLight, ci_parameter_old.DippedLight, JINGUANG, 0, 259, 15);           //近光
-//		Show_Light(ci_parameter.HandBrakeLight, ci_parameter_old.HandBrakeLight, SHOUSHA, 0, 93, 15);       //手刹
-//		Show_Light(ci_parameter.BackWardLight, ci_parameter_old.BackWardLight, HOUTUI, 0, 425, 15);         //后退
-//		Show_Light(ci_parameter.ForwardLight, ci_parameter_old.ForwardLight, QIANJIN, 0, 342, 15);          //前进
-//		Show_Light(ci_parameter.FootBrakeLight, ci_parameter_old.FootBrakeLight, JIAOSHA, 0, 176, 15);      //脚刹
-//		Show_Light(ci_parameter.LowWaterWarning, ci_parameter_old.LowWaterWarning, SHUIWEIDI, 1, 508, 15);  //水位低
+//		Show_Light(ci_parameter.LeftLight, ci_parameter_old.LeftLight, ZUOZHUAN, 1, 10, 15);                //左转
+//		Show_Light(ci_parameter.RightLight, ci_parameter_old.RightLight, YOUZHUAN, 1, 591, 15);             //右转
+//		Show_Light(ci_parameter.DippedLight, ci_parameter_old.DippedLight, JINGUANG, 1, 259, 15);           //近光
+//		Show_Light(ci_parameter.HandBrakeLight, ci_parameter_old.HandBrakeLight, SHOUSHA, 1, 93, 15);       //手刹
+//		Show_Light(ci_parameter.BackWardLight, ci_parameter_old.BackWardLight, HOUTUI, 1, 425, 15);         //后退
+//		Show_Light(ci_parameter.ForwardLight, ci_parameter_old.ForwardLight, QIANJIN, 1, 342, 15);          //前进
+//		Show_Light(ci_parameter.FootBrakeLight, ci_parameter_old.FootBrakeLight, JIAOSHA, 1, 176, 15);      //脚刹
+//		Show_Light(ci_parameter.LowWaterWarning, ci_parameter_old.LowWaterWarning, SHUIWEIDI, 0, 508, 15);  //水位低
 		
-		ShowLeftLight();
-		ShowRightLight();
-		ShowDippedLight();
-		ShowHandBrakeLight();
-		ShowBackwardLight();
-		ShowForwardLight();
-		ShowFootBrakeLight();
-		ShowLowWaterWarning();
+		Show_Speed(rf_sweeper.Speed, rf_sweeper_old.Speed, 1, 3, 520, 380);            //右前扫刷转速
+		Show_Speed(fan_motor.Speed, fan_motor_old.Speed, 2, 4, 510, 211);              //风机转速
+		Show_Speed(run_motor.Speed, run_motor_old.Speed, 4, 2, 280, 240);              //行走速度
 		
-//		Show_Speed(rf_sweeper.Speed, rf_sweeper_old.Speed, 1, 3, 520, 380);            //右前扫刷转速
-//		Show_Speed(fan_motor.Speed, fan_motor_old.Speed, 2, 4, 510, 211);              //风机转速
-//		Show_Speed(run_motor.Speed, run_motor_old.Speed, 4, 2, 280, 240);              //行走速度
-		
-		ShowSpeed();
-		ShowSweeperSpeed();
-		ShowFanSpeed();
+//		ShowSpeed();
+//		ShowSweeperSpeed();
+//		ShowFanSpeed();
 		
 		ShowOdometer();
 		ShowRoomTemp(328, 430);
@@ -2777,12 +2625,13 @@ void ShowMsgInMainInterface(void)
 		HAL_NVIC_DisableIRQ(TIM6_DAC_IRQn);                //关中断
 		HAL_NVIC_DisableIRQ(TIM3_IRQn);       //关中断
 		
-		ShowDippedLight();                                 //显示近光灯状态
-		ShowHandBrakeLight();                              //显示手刹灯状态
-		ShowLowWaterWarning();                             //显示低水位告警灯状态
-		ShowBackwardLight();                               //显示后退灯状态
-		ShowForwardLight();                                //显示前进灯状态
-		ShowFootBrakeLight();                              //显示脚刹灯状态
+		Show_Light(ci_parameter.DippedLight, ci_parameter_old.DippedLight, JINGUANG, 1, 259, 15);           //近光
+		Show_Light(ci_parameter.HandBrakeLight, ci_parameter_old.HandBrakeLight, SHOUSHA, 1, 93, 15);       //手刹
+		Show_Light(ci_parameter.BackWardLight, ci_parameter_old.BackWardLight, HOUTUI, 1, 425, 15);         //后退
+		Show_Light(ci_parameter.ForwardLight, ci_parameter_old.ForwardLight, QIANJIN, 1, 342, 15);          //前进
+		Show_Light(ci_parameter.FootBrakeLight, ci_parameter_old.FootBrakeLight, JIAOSHA, 1, 176, 15);      //脚刹
+		Show_Light(ci_parameter.LowWaterWarning, ci_parameter_old.LowWaterWarning, SHUIWEIDI, 0, 508, 15);  //水位低
+
 		if(main_count<50)
 		{
 			main_count++;
@@ -2797,14 +2646,15 @@ void ShowMsgInMainInterface(void)
 		ShowBatteryQuantity();                             //显示电池电量
 		ShowBatteryStatus();                               //显示电池充放电情况
 		
-		ShowSpeed();                          //显示行进速度
+		Show_Speed(rf_sweeper.Speed, rf_sweeper_old.Speed, 1, 3, 520, 380);            //右前扫刷转速
+		Show_Speed(fan_motor.Speed, fan_motor_old.Speed, 2, 4, 510, 211);              //风机转速
+		Show_Speed(run_motor.Speed, run_motor_old.Speed, 4, 2, 280, 240);              //行走速度
+		
 	  ShowRunError();                       //显示行走故障码
 		ShowOdometer();                       //显示里程数
 		ShowRoomTemp(328, 430);               //显示室内温度
 		ShowWorktime();                       //显示工作时间
-		ShowFanSpeed();	                      //显示风机转速
 		ShowFanError();                       //显示风机故障
-		ShowSweeperSpeed();                   //显示扫刷转速
 		
 		HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);  							 //开启ITM6中断 
 		HAL_NVIC_EnableIRQ(TIM3_IRQn);     								 //开启ITM3中断 
@@ -2830,7 +2680,11 @@ void DisplayData(void)
 	}
 	AT24CXX_WriteLenByte(20,0,1);
 	while(1)
-	{   
+	{ 
+    rf_sweeper.Speed = 100;
+    fan_motor.Speed = 1234;
+    run_motor.Speed = 2451;	
+		
 		if(0)
 		{	
 			BatteryVoltage=685;

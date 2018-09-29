@@ -2,6 +2,7 @@
 #include "user_config.h"
 #include "display.h"
 #include "can.h"
+#include "bmpdisplay.h"
 
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
@@ -130,7 +131,7 @@ void GetP_LeftLight(void)
 		if(p_disio_in_calc.P_LeftLight_Counter>=5)//连续5次50ms采集到相同的值才认为是有效值
 		{
 			ci_parameter.LeftLight=p_disio_in_calc.P_LeftLight_Value;
-			ShowLeftLight();
+			Show_Light(ci_parameter.LeftLight, ci_parameter_old.LeftLight, ZUOZHUAN, 1, 10, 15);                //左转
 			p_disio_in_calc.P_LeftLight_Counter=0;
 		}
 	}
@@ -152,7 +153,7 @@ void GetP_RightLight(void)
 		if(p_disio_in_calc.P_RightLight_Counter>=5)//连续5次50ms采集到相同的值才认为是有效值
 			{
 			ci_parameter.RightLight=p_disio_in_calc.P_RightLight_Value;
-			ShowRightLight();
+			Show_Light(ci_parameter.RightLight, ci_parameter_old.RightLight, YOUZHUAN, 1, 591, 15);             //右转
 			p_disio_in_calc.P_RightLight_Counter=0;
 			}
 		}

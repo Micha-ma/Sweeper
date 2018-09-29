@@ -5,6 +5,7 @@
 #include "DIALOG.h"
 #include "WM.h"
 #include "TEXT.h"
+#include "bmpdisplay.h"
 
 //extern GUI_CONST_STORAGE GUI_BITMAP bmShowAll720480;
 //extern GUI_CONST_STORAGE GUI_BITMAP bm700jinguang;
@@ -39,14 +40,6 @@ extern uint8_t flagbattery;
 void ShowAll(void);
 void InitMainInterface(void);
 void DisplayData(void);
-void ShowLeftLight(void);
-void ShowRightLight(void);
-void ShowForwardLight(void);
-void ShowBackwardLight(void);
-void ShowHandBrakeLight(void);
-void ShowFootBrakeLight(void);
-void ShowDippedLight(void);
-void ShowLowWaterWarning(void);
-
+void Show_Light(u16 lightstatus, u16 lightstatus_old, PICNAME picname, u16 level, u16 x, u16 y);
 
 #endif

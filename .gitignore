@@ -65,5 +65,15 @@ dkms.conf
 *.SearchResults
 *.dbgconf
 *.uvguix
+*.uvguix.Lenovo
+*.uvguix.Micha
+*.uvguix.tao
+*.uvguix.Administrator
 *.uvoptx
 *.uvprojx
+*.crf
+*.axf
+*.dep
+*.htm
+*.lst
+
