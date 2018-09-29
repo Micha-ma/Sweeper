@@ -1,9 +1,0 @@
-..\obj\showall720480.o: ..\RESOURCE\ShowAll720480.c
-..\obj\showall720480.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-..\obj\showall720480.o: ..\EMWIN\STemWin\inc\GUI.h
-..\obj\showall720480.o: ..\EMWIN\STemWin\inc\GUI_ConfDefaults.h
-..\obj\showall720480.o: ..\EMWIN\STemWin\Config\GUIConf.h
-..\obj\showall720480.o: ..\EMWIN\STemWin\inc\GUI_Type.h
-..\obj\showall720480.o: ..\EMWIN\STemWin\inc\LCD.h
-..\obj\showall720480.o: ..\EMWIN\STemWin\inc\Global.h
-..\obj\showall720480.o: ..\EMWIN\STemWin\inc\GUI_Version.h

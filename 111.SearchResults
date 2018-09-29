@@ -1,9 +1,0 @@
----- Ctrltemp Matches (8 in 0 files) ----
-Display.c (hardware\display)://	sprintf(str, "%.1f", (double)Ctrltemp);
-Display.c (hardware\display):	GUI_DispDecAt(Ctrltemp, 265, 190, 3);
-Display.c (hardware\display)://			Ctrltemp = canbuffer[2];
-Display.c (hardware\display):			Ctrltemp = canbuffer[2];
-Display.c (hardware\display)://	uint8_t Ctrltemp=0,Motortemp=0, BatteryTemp=0;
-Display.c (hardware\display)://				Ctrltemp = buf[2];
-Display.c (hardware\display):			Ctrltemp = canbuffer[2];
-Display.c (hardware\display):			Ctrltemp=0;

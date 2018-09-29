@@ -1,9 +1,0 @@
-..\obj\700shandian.o: ..\RESOURCE\700shandian.c
-..\obj\700shandian.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-..\obj\700shandian.o: ..\EMWIN\STemWin\inc\GUI.h
-..\obj\700shandian.o: ..\EMWIN\STemWin\inc\GUI_ConfDefaults.h
-..\obj\700shandian.o: ..\EMWIN\STemWin\Config\GUIConf.h
-..\obj\700shandian.o: ..\EMWIN\STemWin\inc\GUI_Type.h
-..\obj\700shandian.o: ..\EMWIN\STemWin\inc\LCD.h
-..\obj\700shandian.o: ..\EMWIN\STemWin\inc\Global.h
-..\obj\700shandian.o: ..\EMWIN\STemWin\inc\GUI_Version.h
